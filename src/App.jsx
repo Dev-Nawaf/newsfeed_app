@@ -23,15 +23,13 @@ function App() {
 
   async function loadData(currentCategory) {
     const response = await fetch(
-      `https://newsapi.org/v2/top-headlines?category=${currentCategory}&q=${queryValue.current}&page=${
-        pageNumber.current
-      }&pageSize=${PAGE_SIZE}&country=us&apiKey=${import.meta.env.VITE_NEWS_FEED_API_KEY}`
+      `/api/news?category=${currentCategory}&q=${queryValue.current}&page=${pageNumber.current}`
     );
 
     const data = await response.json();
 
     if (data.status === "error") {
-      throw new Error("An error has occured");
+      throw new Error("An error has occurred");
     }
 
     const articles = data.articles.map((article) => {
